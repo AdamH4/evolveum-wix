@@ -32,6 +32,13 @@
     <NuGetAuditLevel>low</NuGetAuditLevel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <!-- Suppress advisories for WixToolset dev-build packages (0.0.0-build.*). The underlying transitive
+         vulnerability (System.Security.Cryptography.Xml) is already pinned to 8.0.3 in Directory.Packages.props.pp. -->
+    <NuGetAuditSuppress Include="https://github.com/advisories/GHSA-rf39-3f98-xr7r" />
+    <NuGetAuditSuppress Include="https://github.com/advisories/GHSA-jx4p-m4wm-vvjg" />
+  </ItemGroup>
+
   <PropertyGroup>
     <Authors Condition=" '$(WixOfficialBuild)'!='true' ">WiX Dev Build</Authors>
     <Authors Condition=" '$(WixOfficialBuild)'=='true' ">WiX Toolset Team</Authors>
