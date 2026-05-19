@@ -69,7 +69,7 @@
     <PackageVersion Include="System.Private.Uri" Version="4.3.2" />
 
     <!-- Pin System.Security.Cryptography.Xml to address GHSA-37gx-xxp4-5rgx and GHSA-w3x6-4m5h-cxqf (high severity). Review as dependencies update. -->
-    <PackageVersion Include="System.Security.Cryptography.Xml" Version="8.0.2" />
+    <PackageVersion Include="System.Security.Cryptography.Xml" Version="8.0.3" />
 
     <!-- Use System.Memory v4.5.5 as it is compatible with VS2022 -->
     <PackageVersion Include="System.Memory" Version="4.5.5" />
