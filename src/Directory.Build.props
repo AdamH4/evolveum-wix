@@ -30,6 +30,11 @@
     <NuGetAudit>true</NuGetAudit>
     <NuGetAuditMode>all</NuGetAuditMode>
     <NuGetAuditLevel>low</NuGetAuditLevel>
+    <!-- Suppress NU1903 (high severity) because WixToolset dev-build packages (0.0.0-build.*) are
+         flagged by advisory databases for each new version. The underlying vulnerability is addressed
+         by pinning System.Security.Cryptography.Xml to 8.0.3 in Directory.Packages.props.pp.
+         NU1904 (critical) remains active. -->
+    <NoWarn>$(NoWarn);NU1903</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
