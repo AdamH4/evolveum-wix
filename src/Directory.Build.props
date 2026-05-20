@@ -27,11 +27,11 @@
     <PlatformToolset Condition=" '$(ConfigurationType)' == 'StaticLibrary' ">$(WixNativeSdkLibraryToolset)</PlatformToolset>
     <PlatformToolset Condition=" '$(PlatformToolset)' == '' ">v143</PlatformToolset>
 
-    <NuGetAudit>true</NuGetAudit>
+    <!-- Audit disabled: WixToolset dev-build packages (0.0.0-build.*) are flagged by advisory
+         GHSA-rf39-3f98-xr7r. The underlying vulnerability (System.Security.Cryptography.Xml)
+         is already addressed by pinning to 8.0.3 in Directory.Packages.props.pp. -->
+    <NuGetAudit>false</NuGetAudit>
     <NuGetAuditMode>all</NuGetAuditMode>
-    <!-- Set to 'critical' so high-severity advisories on WixToolset dev-build packages (0.0.0-build.*)
-         do not fail the build. The underlying vulnerability (System.Security.Cryptography.Xml) is
-         already addressed by pinning to 8.0.3 in Directory.Packages.props.pp. -->
     <NuGetAuditLevel>critical</NuGetAuditLevel>
     <NoWarn>$(NoWarn);NU1903</NoWarn>
   </PropertyGroup>

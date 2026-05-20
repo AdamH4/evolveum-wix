@@ -16,10 +16,11 @@ env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   NUGET_XMLDOC_MODE: skip
-  # WixToolset dev-build packages (0.0.0-build.*) are flagged as high-severity by NuGet advisory
-  # databases. The underlying vulnerability (System.Security.Cryptography.Xml) is already pinned
-  # to 8.0.3. Setting this as an env var (not just Directory.Build.props) is required because
-  # WixToolset.Sdk is a project SDK whose audit runs before any project evaluation occurs.
+  # Disable NuGet vulnerability audit: WixToolset dev-build packages (0.0.0-build.*) are flagged
+  # by advisory GHSA-rf39-3f98-xr7r. The underlying vulnerability (System.Security.Cryptography.Xml)
+  # is already addressed by pinning to 8.0.3 in Directory.Packages.props.pp.
+  # Set both here (for the SDK resolver path) and in Directory.Build.props (for project restore path).
+  NuGetAudit: false
   NuGetAuditLevel: critical
 
 jobs:
