@@ -44,6 +44,16 @@ call burn\burn.cmd %_C% || exit /b
 call wix\wix.cmd %_C% || exit /b
 
 
+:: Bypass NuGet SDK Resolver vulnerability check for WixToolset.Sdk dev builds (GHSA-rf39-3f98-xr7r).
+:: Dev-build versions (0.0.0-build.*) fall in the advisory's affected range. We redirect MSBuild to
+:: resolve WixToolset.Sdk from the already-published directory and hide the nupkg so the NuGet SDK
+:: Resolver returns "not found" (falls through to DefaultSdkResolver → MSBuildSDKsPath) rather than
+:: logging an error and halting SDK resolution.
+@for %%f in (..\build\artifacts\WixToolset.Sdk.*.nupkg) do @ren "%%f" "%%~nxf.hidden"
+@rd /s/q "%USERPROFILE%\.nuget\packages\wixtoolset.sdk" 2>nul
+@set "MSBuildSDKsPath=%CD%\..\build\wix\%_C%\publish"
+
+
 :: tools
 
 call tools\tools.cmd %_C% || exit /b
